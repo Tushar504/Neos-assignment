@@ -1,12 +1,14 @@
 const express=require('express')
+
 var fs = require('fs');
 const fileName="./assets/userData.json"
 const file = require(fileName);
 const validation=require("./middlewares/validation")
 var cors = require('cors')
-app.use(cors())
+
 
 const app=express()
+app.use(cors())
 app.use(express.json())
 
 const hash=(password)=>{
