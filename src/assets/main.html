@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+   form{
+    width: 50%;
+    margin: auto;
+   }
+   #LoginDiv{
+    display: block;
+   }
+   #SignupDiv{
+    display: none;
+   }
+   h6{
+    color: blue;
+    text-decoration:underline;
+   }
+  </style>
+  <body>
+    <div id="LoginDiv">
+        <form>
+            <h1>Login</h1>
+            <p>Email</p>
+            <input id="email" type="text"/>
+            <p>Password</p>
+            <input id="password" type="password"/><br></br>
+            <button onclick="Login()">Submit</button>
+            <h6 onclick="showSignup()">Don't have account?Register</h6>
+        </form>
+
+    </div>
+    <div id="SignupDiv">
+        <form>
+            <h1>Signup</h1>
+            <p>Name</p>
+            <input id="Name" type="text"/>
+            <p>Email</p>
+            <input id="Email" type="email"/>
+            <p>Password</p>
+            <input id="Password" type="password"/><br></br>
+            <button onclick="Signup()">Submit</button>
+            <h6 onclick="showLogin()">Already have account?Login</h6>
+        </form>
+    </div>
+  </body>
+</html>
+<script>
+    const Login=async()=>{
+     event.preventDefault()
+        let email=document.getElementById("email").value
+        let password=document.getElementById('password').value
+        try {
+            let res=await fetch("http://localhost:1200/login",{
+                method:"POST",
+                body:JSON.stringify({email:email,password:password}),
+                headers: {
+                    'Content-Type': 'application/json'
+                   
+                }
+            })
+            let data=await res.json()
+             alert(`${data.message}`)
+        } catch (error) {
+            console.log(error)
+        }
+      
+    }
+
+    const Signup=async()=>{
+     event.preventDefault()
+        let name=document.getElementById("Name").value
+        let email=document.getElementById("Email").value
+        let password=document.getElementById('Password').value
+        try {
+            let res=await fetch("http://localhost:1200/signup",{
+                method:"POST",
+                body:JSON.stringify({name:name,email:email,password:password}),
+                headers: {
+                    'Content-Type': 'application/json'
+                   
+                }
+            })
+            let data=await res.json()
+             alert(`${data.message}`)
+        } catch (error) {
+            console.log(error)
+        }
+      
+    }
+
+    const showSignup=()=>{
+        document.getElementById("LoginDiv").style.display="none"
+        document.getElementById("SignupDiv").style.display="block"
+    }
+    const showLogin=()=>{
+        document.getElementById("LoginDiv").style.display="block"
+        document.getElementById("SignupDiv").style.display="none"
+    }
+</script>
