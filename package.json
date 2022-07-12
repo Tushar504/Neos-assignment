@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/Tushar504/Neos-assignment#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1"
   }
 }

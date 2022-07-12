@@ -3,6 +3,8 @@ var fs = require('fs');
 const fileName="./assets/userData.json"
 const file = require(fileName);
 const validation=require("./middlewares/validation")
+var cors = require('cors')
+app.use(cors())
 
 const app=express()
 app.use(express.json())
@@ -79,7 +81,7 @@ app.get('/', async(req, res)=>{
    
 
 })
-app.listen(1200,async()=>{
+app.listen(process.env.PORT||1200,async()=>{
      try {
         console.log("listening on port 1200")
      } 
